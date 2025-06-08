@@ -1,125 +1,213 @@
 /* Form Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'ＭＳ Ｐゴシック', sans-serif;
+    font-size: 10pt;
+    background-color: #FFFFFF;
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
 .form-table {
     border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 10px;
+    width: auto;
 }
 
 .form-table td {
-    padding: 5px;
-    border: 1px solid #C0C0C0;
+    border: 1px solid #808080;
+    padding: 2px;
+    vertical-align: middle;
 }
 
-.label-cell {
-    background-color: #E0E0E0;
-    font-weight: bold;
-}
-
-.label-cell-lightblue {
-    background-color: #E0FFFF;
-    font-weight: bold;
-}
-
-.label-cell-lightgreen {
-    background-color: #E0FFDF;
-    font-weight: bold;
-}
-
-.label-cell-lightpurple {
-    background-color: #E8E0FF;
-    font-weight: bold;
-}
-
-.bg-ffffff {
-    background-color: #FFFFFF;
-}
-
-.bg-efefef {
+.form-table td.label-cell {
     background-color: #EFEFEF;
+    font-weight: normal;
+}
+
+.form-table td.label-cell-yellow {
+    background-color: #FFFF35;
+}
+
+.form-table td.label-cell-lightblue {
+    background-color: #A1E2FF;
+}
+
+.form-table td.label-cell-lightgreen {
+    background-color: #C2FF91;
+}
+
+.form-table td.label-cell-lightpurple {
+    background-color: #D2BFFF;
+}
+
+.form-table input[type="text"],
+.form-table input[type="date"],
+.form-table select,
+.form-table textarea {
+    font-family: 'ＭＳ Ｐゴシック', sans-serif;
+    font-size: 10pt;
+    width: 98%;
+    box-sizing: border-box;
+}
+
+.form-table textarea {
+    min-height: 40px;
 }
 
 .required-star {
-    color: red;
+    color: #FF0000;
 }
 
-.small-font-note {
-    font-size: 0.8em;
-}
-
-.red-text {
-    color: red;
-}
-
-/* Tab Styles */
 .tab-container {
-    margin: 20px 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .tab-strip {
     display: flex;
-    border-bottom: 1px solid #C0C0C0;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border-bottom: 1px solid #808080;
+}
+
+.TabControl1TabStrip {
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.TabControl2TabStrip {
+    border-bottom: 1px solid #DDDDDD;
 }
 
 .tab {
-    padding: 8px 15px;
-    cursor: pointer;
-    border: 1px solid #C0C0C0;
-    border-bottom: none;
+    padding: 2px 5px;
     margin-right: 2px;
+    margin-bottom: -1px;
+    border: 1px outset #DDDDDD;
+    border-bottom: none;
+    cursor: pointer;
+    background-color: #F0F0F0;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 10pt;
+    color: #000000;
 }
 
 .tab.active {
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #FFFFFF;
-    margin-bottom: -1px;
+    border-width: 2px;
+    padding: 1px 4px;
+    border-bottom: 1px solid transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.tab a.tab-link {
+    color: #000000;
+    font: normal normal Helvetica 10pt;
+    text-decoration: none;
 }
 
 .tab-content-container {
-    border: 1px solid #C0C0C0;
-    padding: 15px;
-    background-color: #FFFFFF;
+    border: 1px solid #808080;
+    border-top: none;
+    padding: 2px;
+    font: 12pt Tahoma,Arial,sans-serif;
+    text-align: justify;
 }
 
 .tab-pane {
     display: none;
+    padding: 5px;
 }
 
 .tab-pane.active {
     display: block;
 }
 
-/* Form Elements */
-input[type="text"],
-input[type="date"],
-textarea {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #C0C0C0;
+.radio-group label, .checkbox-group label {
+    margin-right: 10px;
+    font-family: 'ＭＳ Ｐゴシック', sans-serif;
+    font-size: 10pt;
 }
 
-.radio-group {
-    text-align: center;
+.radio-group input, .checkbox-group input {
+    margin-right: 3px;
 }
 
-.radio-group label {
-    margin: 0 5px;
+.inline-table {
+    display: inline-table;
+    background-color: transparent;
 }
+
+.inline-table td {
+    border: none;
+    padding: 0 2px;
+}
+
+.section-header {
+    font-weight: bold;
+    font-size: 10pt;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.customer-header { color: #6260A1; }
+.consignee-header { color: #FF8100; }
+.enduser-header { color: #FF0041; }
+.supplier-header { color: #0000FF; }
+
+.small-font-note {
+    font-size: 8pt;
+    color: #5F5F5F;
+}
+
+.red-text { color: #FF0000; }
+.blue-text { color: #0000FF; }
+.gray-text { color: #808080; }
+
+.fixed-width-label {
+    width: 132px;
+}
+
+.fixed-width-content {
+    width: 585px;
+}
+
+.fixed-width-content-small {
+    width: 226px;
+}
+
+.bg-efefef { background-color: #EFEFEF; }
+.bg-ffffd0 { background-color: #FFFFD0; }
+.bg-e0ffff { background-color: #E0FFFF; }
+.bg-ffffff { background-color: #FFFFFF; }
+.bg-e0ffdf { background-color: #E0FFDF; }
+.bg-e8e0ff { background-color: #E8E0FF; }
+.bg-e0e0ff { background-color: #E0E0FF; }
+.bg-ffe0ff { background-color: #FFE0FF; }
+.bg-ffffc2 { background-color: #FFFFC2; }
+.bg-ffe0f5 { background-color: #FFE0F5; }
+.bg-c2efff { background-color: #C2EFFF; }
 
 /* Toolbar */
 .toolbar {
-    margin-bottom: 20px;
+    background-color: navy;
+    padding: 5px;
+    border-bottom: 1px solid Gray;
+    margin-bottom: 8px;
 }
 
 .toolbar button {
-    padding: 5px 15px;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    padding: 3px 8px;
     margin-right: 5px;
+    font-family: 'Arial', sans-serif;
+    font-size: 9pt;
     cursor: pointer;
+}
+
+.page-container {
+    padding: 8px;
 }
 
 /* Responsive Design */
