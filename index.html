@@ -4,7 +4,210 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebForm7 Modernized</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'ＭＳ Ｐゴシック', sans-serif;
+            font-size: 10pt;
+            background-color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+        }
+
+        .toolbar {
+            background-color: navy;
+            padding: 5px;
+            border-bottom: 1px solid Gray;
+            margin-bottom: 8px;
+        }
+
+        .toolbar button {
+            background-color: #FFFFFF;
+            border: 1px solid #CCCCCC;
+            padding: 3px 8px;
+            margin-right: 5px;
+            font-family: 'Arial', sans-serif;
+            font-size: 9pt;
+            cursor: pointer;
+        }
+
+        .page-container {
+            padding: 8px;
+        }
+
+        .form-table, .content-table {
+            border-collapse: collapse;
+            width: auto; /* Adjust as needed, original uses fixed widths often */
+        }
+
+        .form-table td, .content-table td {
+            border: 1px solid #808080;
+            padding: 2px;
+            vertical-align: middle;
+        }
+
+        .form-table td.label-cell {
+            background-color: #EFEFEF;
+            font-weight: normal;
+        }
+        .form-table td.label-cell-yellow {
+            background-color: #FFFF35;
+        }
+        .form-table td.label-cell-lightblue {
+            background-color: #A1E2FF;
+        }
+         .form-table td.label-cell-lightgreen {
+            background-color: #C2FF91;
+        }
+        .form-table td.label-cell-lightpurple {
+            background-color: #D2BFFF;
+        }
+
+
+        .form-table input[type="text"],
+        .form-table input[type="date"],
+        .form-table select,
+        .form-table textarea {
+            font-family: 'ＭＳ Ｐゴシック', sans-serif;
+            font-size: 10pt;
+            width: 98%; /* Adjust as needed */
+            box-sizing: border-box;
+        }
+        .form-table textarea {
+            min-height: 40px;
+        }
+
+        .required-star {
+            color: #FF0000;
+        }
+
+        /* TabControl Styles */
+        .tab-container {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .tab-strip {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border-bottom: 1px solid #808080; /* Default border, can be overridden by specific tab control styles */
+        }
+        
+        .TabControl1TabStrip { /* Mimicking original class for potential specific styles */
+             border-bottom: 1px solid #DDDDDD; /* From original td.TabControl1Tab */
+        }
+        .TabControl2TabStrip {
+             border-bottom: 1px solid #DDDDDD; /* From original td.TabControl2Tab */
+        }
+
+        .tab {
+            padding: 2px 5px;
+            margin-right: 2px;
+            margin-bottom: -1px; /* Overlap border */
+            border: 1px outset #DDDDDD;
+            border-bottom: none;
+            cursor: pointer;
+            background-color: #F0F0F0; /* Default tab background */
+            font-family: 'Helvetica', sans-serif; /* Default from original */
+            font-size: 10pt;
+            color: #000000;
+        }
+
+        .tab.active {
+            border-width: 2px; /* From TabSelected style */
+            padding: 1px 4px; /* Adjust padding for selected tab */
+            border-bottom: 1px solid transparent; /* To make it look connected to content */
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tab a.tab-link {
+            color: #000000;
+            font: normal normal Helvetica 10pt;
+            text-decoration: none;
+        }
+
+        .tab-content-container {
+            border: 1px solid #808080; /* Default border, can be overridden */
+            border-top: none;
+            padding: 2px;
+            font: 12pt Tahoma,Arial,sans-serif; /* Default from original ContentCssClass */
+            text-align: justify; /* Default from original ContentCssClass */
+        }
+
+        .TabControl1Content { /* Mimicking original class */
+            /* Styles from original td.TabControl1Content */
+        }
+        .TabControl2Content {
+            /* Styles from original td.TabControl2Content */
+        }
+
+        .tab-pane {
+            display: none;
+            padding: 5px; /* Add some padding to tab panes */
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .radio-group label, .checkbox-group label {
+            margin-right: 10px;
+            font-family: 'ＭＳ Ｐゴシック', sans-serif;
+            font-size: 10pt;
+        }
+        .radio-group input, .checkbox-group input {
+            margin-right: 3px;
+        }
+
+        .inline-table { display: inline-table; background-color: transparent; }
+        .inline-table td { border: none; padding: 0 2px; }
+
+        .section-header {
+            font-weight: bold;
+            font-size: 10pt;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        .customer-header { color: #6260A1; }
+        .consignee-header { color: #FF8100; }
+        .enduser-header { color: #FF0041; }
+        .supplier-header { color: #0000FF; }
+
+        .small-font-note {
+            font-size: 8pt;
+            color: #5F5F5F; /* Example from original notes */
+        }
+        .red-text { color: #FF0000; }
+        .blue-text { color: #0000FF; }
+        .gray-text { color: #808080; }
+
+        .fixed-width-label {
+            width: 132px; /* Common width from original */
+        }
+        .fixed-width-content {
+            width: 585px; /* Common width from original */
+        }
+        .fixed-width-content-small {
+             width: 226px;
+        }
+
+        /* Specific background colors for sections from original */
+        .bg-efefef { background-color: #EFEFEF; }
+        .bg-ffffd0 { background-color: #FFFFD0; } /* TabPage1 */
+        .bg-e0ffff { background-color: #E0FFFF; } /* TabPage2 */
+        .bg-ffffff { background-color: #FFFFFF; } /* TabPage3, TabPage4 */
+        .bg-e0ffdf { background-color: #E0FFDF; } /* TabPage5 */
+        .bg-e8e0ff { background-color: #E8E0FF; } /* TabPage6, Customer section */
+        .bg-e0e0ff { background-color: #E0E0FF; } /* TabPage7 */
+        .bg-ffe0ff { background-color: #FFE0FF; } /* TabPage8, TabPage9 */
+        .bg-ffffc2 { background-color: #FFFFC2; } /* Consignee section */
+        .bg-ffe0f5 { background-color: #FFE0F5; } /* End-user section */
+        .bg-c2efff { background-color: #C2EFFF; } /* Supplier section */
+
+    </style>
 </head>
 <body>
     <form id="Form1">
@@ -14,6 +217,7 @@
             <button type="button">下書き保</button>
             <button type="button">保</button>
             <button type="button">部門取引審査責任者へ送信</button>
+            <!-- Add other buttons from original ToolBar here -->
         </div>
 
         <div class="page-container">
@@ -58,6 +262,54 @@
                                 <td style="background-color: #FFFFD0;">
                                     <table class="form-table" style="width:100%;">
                                         <tr>
+                                            <td class="label-cell-yellow fixed-width-label">審査種類 <span class="required-star">*</span></td>
+                                            <td class="fixed-width-content bg-ffffff"><span id="Label694"></span></td>
+                                        </tr>
+                                    </table>
+                                    <table class="form-table" style="width:100%;">
+                                        <tr>
+                                            <td class="label-cell-yellow fixed-width-label">貨物・技術の種類 <span class="required-star">*</span></td>
+                                            <td class="fixed-width-content bg-ffffff"><input type="text" id="TextBox118"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-cell-yellow fixed-width-label">最終用途 <span class="required-star">*</span></td>
+                                            <td class="fixed-width-content bg-ffffff"><input type="text" id="TextBox119"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-cell-yellow fixed-width-label">設置/使用場所 <span class="required-star">*</span></td>
+                                            <td class="fixed-width-content bg-ffffff"><input type="text" id="TextBox120"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- TabPage2: CA審査票（兼 米国法審査票） -->
+                    <div id="tabPage2" class="tab-pane" style="background-color: #E0FFFF;">
+                        <table class="content-table" style="width:755px;">
+                            <tr>
+                                <td style="background-color: #E0FFFF;">
+                                    <table class="form-table" style="width:100%;">
+                                        <tr>
+                                            <td class="label-cell-lightblue fixed-width-label"></td>
+                                            <td class="fixed-width-content-small bg-ffffff"></td>
+                                            <td class="label-cell-lightblue fixed-width-label">取引総額 <span class="required-star">*</span></td>
+                                            <td class="fixed-width-content-small bg-ffffff"><input type="text" id="TextBox121"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-cell-lightblue fixed-width-label">受注商品名 <span class="required-star">*</span></td>
+                                            <td class="fixed-width-content-small bg-ffffff"><input type="text" id="TextBox122"></td>
+                                            <td class="label-cell-lightblue fixed-width-label">外為法リスト規制貨物等 <span class="required-star">*</span></td>
+                                            <td class="fixed-width-content-small bg-ffffff radio-group">
+                                                <label><input type="radio" name="RegulationChk" value="yes">有</label>
+                                                <label><input type="radio" name="RegulationChk" value="no">無</label>
+                                                <!-- Hidden RadioButton44, RadioButton45 for Dsp -->
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="form-table" style="width:100%;">
+                                         <tr>
                                             <td class="label-cell-lightblue fixed-width-label">米国法判定 <span class="required-star">*</span></td>
                                             <td class="fixed-width-content bg-ffffff radio-group">
                                                 <span class="red-text small-font-note">いずれに該当しますか？</span><br>
@@ -68,7 +320,24 @@
                                             </td>
                                         </tr>
                                     </table>
-
+                                     <table class="form-table" style="width:100%;">
+                                        <tr>
+                                            <td class="label-cell-lightblue fixed-width-label">Quotation No. /部門管理No.<span class="required-star">*</span>見積書No.</td>
+                                            <td colspan="2" class="fixed-width-content bg-ffffff">
+                                                <span class="red-text small-font-note">Quotation添付時、Quotation No.を、ｵｰﾀﾞｰ明細の添付時、部門管理No.を ご記入ください。</span><br>
+                                                <input type="text" id="TextBox123">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-cell-lightblue fixed-width-label">取引契約書名称</td>
+                                            <td colspan="2" class="fixed-width-content bg-ffffff"><input type="text" id="TextBox124"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-cell-lightblue fixed-width-label">ｶｽﾀﾏｰｵｰﾀﾞｰNo.</td>
+                                            <td class="fixed-width-content-small bg-ffffff"><input type="text" id="TextBox125"></td>
+                                            <td style="width:359px;"></td> <!-- Empty cell -->
+                                        </tr>
+                                    </table>
                                     <table class="form-table" style="width:100%;">
                                         <tr>
                                             <td class="label-cell-lightblue fixed-width-label">前回の安貿取引承認No.</td>
@@ -131,7 +400,12 @@
                                                                 <tr><td></td><td>④</td><td colspan="2">特殊水の製造</td><td class="radio-group"><label><input type="radio" name="ChkQuest7" value="yes">はい</label><label><input type="radio" name="ChkQuest7" value="no">いいえ</label></td></tr>
                                                                 <tr><td></td><td>⑤</td><td colspan="2">特殊原料・燃料物質の加工・再処理</td><td class="radio-group"><label><input type="radio" name="ChkQuest8" value="yes">はい</label><label><input type="radio" name="ChkQuest8" value="no">いいえ</label></td></tr>
                                                                 <tr><td></td><td>⑥</td><td colspan="2">取引先が特殊機関若しくはこれらの機関から委託を受けていますか？</td><td class="radio-group"><label><input type="radio" name="ChkQuest9" value="yes">はい</label><label><input type="radio" name="ChkQuest9" value="no">いいえ</label></td></tr>
+                                                                <tr><td></td><td></td><td style="width:26px;">a.</td><td style="width:449px;">化学物質の開発若しくは製造</td><td class="radio-group"><label><input type="radio" name="ChkQuest10" value="yes">はい</label><label><input type="radio" name="ChkQuest10" value="no">いいえ</label></td></tr>
+                                                                <tr><td></td><td></td><td>b.</td><td>微生物若しくは毒素の開発等</td><td class="radio-group"><label><input type="radio" name="ChkQuest11" value="yes">はい</label><label><input type="radio" name="ChkQuest11" value="no">いいえ</label></td></tr>
+                                                                <tr><td></td><td></td><td>c.</td><td>ロケット若しくは無人航空機の開発等</td><td class="radio-group"><label><input type="radio" name="ChkQuest12" value="yes">はい</label><label><input type="radio" name="ChkQuest12" value="no">いいえ</label></td></tr>
+                                                                <tr><td></td><td></td><td>d.</td><td>宇宙に関する研究</td><td class="radio-group"><label><input type="radio" name="ChkQuest13" value="yes">はい</label><label><input type="radio" name="ChkQuest13" value="no">いいえ</label></td></tr>
                                                             </table>
+                                                            <div class="section-header">&lt;インフォーム確認&gt;</div>
                                                             <table class="form-table" style="width:100%; border-color: #C0C0C0;">
                                                                 <tr>
                                                                     <td style="width:26px;">［4］</td>
@@ -141,6 +415,58 @@
                                                                         <label><input type="radio" name="ChkQuest14" value="no">いいえ</label>
                                                                     </td>
                                                                 </tr>
+                                                            </table>
+                                                            <div class="section-header">&lt;特別用途管理取引その他の確認&gt;</div>
+                                                            <table class="form-table" style="width:100%; border-color: #C0C0C0;">
+                                                                <tr><td style="width:26px;">［5］</td><td style="width:502px;">上欄記入の取引関係者に軍（テロ組織を含む）若しくは国防機関・警察を含みますか？又は、その他軍事用途に用いられる疑いがありますか？</td><td style="width:151px;" class="radio-group"><label><input type="radio" name="ChkQuest15" value="yes">はい</label><label><input type="radio" name="ChkQuest15" value="no">いいえ</label></td></tr>
+                                                                <tr><td>［6］</td><td>仕向地またはいずれかの取引関係者の所在地はイラン、イラク、リビア、北朝鮮、キューバ、スーダン、シリア、アフガニスタンですか？</td><td class="radio-group"><label><input type="radio" name="ChkQuest16" value="yes">はい</label><label><input type="radio" name="ChkQuest16" value="no">いいえ</label></td></tr>
+                                                                <tr><td>［7］<span class="small-font-note">※</span></td><td>その他、上記[1]～[6]以外で <strong style="font-style:italic; text-decoration:underline;">※取引の内容に不審</strong> がありますか？<br><span class="small-font-note">「取引の内容に不審」とは、次頁のハイリスク・プロファイル・チェックシートの1～17項を包括して確認し、取引に注意を要する兆候が現われていることです。（当該取引が怪しいと感じられた場合は、取引の内容に不審があると判断してください。）</span></td><td class="radio-group"><label><input type="radio" name="ChkQuest17" value="yes">はい</label><label><input type="radio" name="ChkQuest17" value="no">いいえ</label></td></tr>
+                                                            </table>
+                                                            <div class="section-header">&lt;需要者確認&gt;</div> <!-- This seems like a repeat or sub-section, original has it -->
+                                                            <table class="form-table" style="width:100%; border-color: #C0C0C0;">
+                                                                <tr><td style="width:26px;" class="bg-efefef">［8］</td><td colspan="2" style="width:502px;" class="bg-efefef">輸出される技術があらゆる海事原子力プラント、その陸上プロトタイプ、及び建設、支援、メンテナンスの為の特別な施設に関連する技術で海事原子力推進プロジェクトに用いられることを知っている。</td><td style="width:151px;" class="bg-efefef radio-group"><label><input type="radio" name="ChkQuest18" value="yes">はい</label><label><input type="radio" name="ChkQuest18" value="no">いいえ</label></td></tr>
+                                                                <tr><td class="bg-ffffff">［9］</td><td colspan="2" class="bg-ffffff">下記質問 ⅰ）ⅱ） ともに「はい」である</td><td class="bg-ffffff radio-group"><label><input type="radio" name="ChkQuest19" value="yes">はい</label><label><input type="radio" name="ChkQuest19" value="no">いいえ</label></td></tr>
+                                                                <tr><td class="bg-efefef"></td><td style="width:26px;" class="bg-efefef">ⅰ）</td><td style="width:476px;" class="bg-efefef">貨物に汎用マイクロプロセッサ、マイクロコンピュータ又はマイクロコントローラを含む</td><td style="width:151px;" class="bg-efefef radio-group"><label><input type="radio" name="ChkQuest20" value="yes">はい</label><label><input type="radio" name="ChkQuest20" value="no">いいえ</label></td></tr>
+                                                                <tr><td class="bg-ffffff"></td><td class="bg-ffffff">ⅱ）</td><td class="bg-ffffff">最終仕向地が下記 D：1国家群（制限地域）に含まれる<br><span class="small-font-note">D：1国家群 制限国・地域</span></td><td class="bg-ffffff radio-group"><label><input type="radio" name="ChkQuest21" value="yes">はい</label><label><input type="radio" name="ChkQuest21" value="no">いいえ</label></td></tr>
+                                                                <tr><td class="bg-efefef">[10]</td><td colspan="2" class="bg-efefef">仕向地・最終使用地・最終設置場所のいずれかが、制限国向けですか？</td><td class="bg-efefef radio-group"><label><input type="radio" name="ChkQuest22" value="yes">はい</label><label><input type="radio" name="ChkQuest22" value="no">いいえ</label></td></tr>
+                                                                <tr><td>[11]</td><td colspan="2">その他、上記[8]～[10]以外で <strong style="font-style:italic; text-decoration:underline;">※取引の内容に不審</strong> がありますか？</td><td class="radio-group"><label><input type="radio" name="ChkQuest23" value="yes">はい</label><label><input type="radio" name="ChkQuest23" value="no">いいえ</label></td></tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <!-- TabPage4: <<ハイリスク・プロファイル・チェックシート >> -->
+                                            <div id="tabPage4" class="tab-pane" style="background-color: #FFFFFF;">
+                                                <table class="content-table" style="width:718px;">
+                                                    <tr>
+                                                        <td class="bg-ffffff">
+                                                            <table class="form-table" style="width:100%; border-color: #C0C0C0;">
+                                                                <tr><td style="width:30px;" class="bg-efefef">1）</td><td colspan="2" style="width:446px;" class="bg-efefef">契約相手先、荷受人、最終需要者等（以下、取引関係者という）の存在および身元が確認されていない。</td><td style="width:15px;" class="bg-efefef"></td><td style="width:189px;" class="bg-efefef radio-group"><label><input type="radio" name="HpChkQuest1" value="yes">はい</label><label><input type="radio" name="HpChkQuest1" value="no">いいえ</label></td></tr>
+                                                                <tr><td>2）</td><td colspan="2">取引関係者が通常兵器の開発等を行う、または行っていたとの情報を得た。</td><td></td><td class="radio-group"><label><input type="radio" name="HpChkQuest2" value="yes">はい</label><label><input type="radio" name="HpChkQuest2" value="no">いいえ</label></td></tr>
+                                                                <tr><td class="bg-efefef">3）</td><td colspan="2" class="bg-efefef">以下の①、②のいずれかに印を付けて回答ください。</td><td class="bg-efefef"></td><td class="bg-efefef radio-group"><label><input type="radio" name="HpChkQuest3" value="yes">はい</label><label><input type="radio" name="HpChkQuest3" value="no">いいえ</label></td></tr>
+                                                                <tr><td class="bg-efefef"></td><td style="width:34px;" class="bg-efefef"><input type="checkbox" id="CheckBox31" checked></td><td style="width:412px;" class="bg-efefef">（顧客が特定されている場合）取引関係者から該当貨物・技術（以下貨物等という）の用途に関する明確な説明がない、または説明が不明確である。（例：当該貨物が相手国内で使用されているか、再輸出されるかについて買主が明確な説明を避ける、或いは説明の内容が不明確である。）</td><td class="bg-efefef"></td><td class="bg-efefef"></td></tr>
+                                                                <tr><td class="bg-efefef"></td><td class="bg-efefef"><input type="checkbox" id="CheckBox32" checked></td><td class="bg-efefef">（ストック販売の場合）用途に関する懸念情報を得た。</td><td class="bg-efefef"></td><td class="bg-efefef"></td></tr>
+                                                                <tr><td>4）</td><td colspan="2">需要者の事業内容、技術レベルからみて、当該貨物等を必要とすることは不自然と思われる。（例：エレクトロニクス産業のない国への半導体製造装置の輸出）</td><td></td><td class="radio-group"><label><input type="radio" name="HpChkQuest4" value="yes">はい</label><label><input type="radio" name="HpChkQuest4" value="no">いいえ</label></td></tr>
+                                                                <tr><td class="bg-efefef">5）</td><td colspan="2" class="bg-efefef">以下の①、②のいずれかに印を付けて回答ください。</td><td class="bg-efefef"></td><td class="bg-efefef radio-group"><label><input type="radio" name="HpChkQuest5" value="yes">はい</label><label><input type="radio" name="HpChkQuest5" value="no">いいえ</label></td></tr>
+                                                                <tr><td class="bg-efefef"></td><td class="bg-efefef"><input type="checkbox" id="CheckBox33" checked></td><td class="bg-efefef">（顧客が特定されている場合）当該貨物等の設置場所または使用場所が明確になっていない、または設置場所が不自然と思われる。（例：貨物等の最終仕向地として通関業者の名前が指定されている場合や、電子産業が存在しない国を最終仕向地とした半導体製造装置の注文等）</td><td class="bg-efefef"></td><td class="bg-efefef"></td></tr>
+                                                                <tr><td class="bg-efefef"></td><td class="bg-efefef"><input type="checkbox" id="CheckBox34" checked></td><td class="bg-efefef">（ストック販売の場合）当該貨物等の設置場所、もしくは使用場所について懸念情報を得た。</td><td class="bg-efefef"></td><td class="bg-efefef"></td></tr>
+                                                                <tr><td>6）</td><td colspan="2">当該貨物等の設置場所または使用場所が軍事施設内若しくは軍事施設に隣接している地域または立ち入りが制限されている等の高度の機密が要求されている地域であり、かつ、その用途に疑わしい点がある。</td><td></td><td class="radio-group"><label><input type="radio" name="HpChkQuest6" value="yes">はい</label><label><input type="radio" name="HpChkQuest6" value="no">いいえ</label></td></tr>
+                                                                <tr><td class="bg-efefef">7）</td><td colspan="2" class="bg-efefef">当該貨物等の輸送、設置等について過剰な安全装置・処置が要求されている。</td><td class="bg-efefef"></td><td class="bg-efefef radio-group"><label><input type="radio" name="HpChkQuest7" value="yes">はい</label><label><input type="radio" name="HpChkQuest7" value="no">いいえ</label></td></tr>
+                                                                <tr><td>8）</td><td colspan="2">当該貨物が使用される設備や同時に扱う原材料についての説明がなされていない。</td><td></td><td class="radio-group"><label><input type="radio" name="HpChkQuest8" value="yes">はい</label><label><input type="radio" name="HpChkQuest8" value="no">いいえ</label><label><input type="radio" name="HpChkQuest8" value="na">対象外</label></td></tr>
+                                                                <tr><td class="bg-efefef">9）</td><td colspan="2" class="bg-efefef">異常に大量、若しくは不適切なスペアパーツ等の要求がある。</td><td class="bg-efefef"></td><td class="bg-efefef radio-group"><label><input type="radio" name="HpChkQuest9" value="yes">はい</label><label><input type="radio" name="HpChkQuest9" value="no">いいえ</label></td></tr>
+                                                                <tr><td>10）</td><td colspan="2">通常必要とされる関連装置の要求がない。</td><td></td><td class="radio-group"><label><input type="radio" name="HpChkQuest10" value="yes">はい</label><label><input type="radio" name="HpChkQuest10" value="no">いいえ</label><label><input type="radio" name="HpChkQuest10" value="na">対象外</label></td></tr>
+                                                                <tr><td class="bg-efefef">11）</td><td colspan="2" class="bg-efefef">輸送時における表示、船積について特別な要請がある。</td><td class="bg-efefef"></td><td class="bg-efefef radio-group"><label><input type="radio" name="HpChkQuest11" value="yes">はい</label><label><input type="radio" name="HpChkQuest11" value="no">いいえ</label></td></tr>
+                                                                <tr><td>12）</td><td colspan="2">貨物等及び仕向地から見て、輸送ルートにおいて異常がある。</td><td></td><td class="radio-group"><label><input type="radio" name="HpChkQuest12" value="yes">はい</label><label><input type="radio" name="HpChkQuest12" value="no">いいえ</label></td></tr>
+                                                                <tr><td class="bg-efefef">13）</td><td colspan="2" class="bg-efefef">輸送時における梱包及び梱包における表示が輸送方法や仕向地等からみて一貫性がない。</td><td class="bg-efefef"></td><td class="bg-efefef radio-group"><label><input type="radio" name="HpChkQuest13" value="yes">はい</label><label><input type="radio" name="HpChkQuest13" value="no">いいえ</label></td></tr>
+                                                                <tr><td>14）</td><td colspan="2">当該貨物等の支払単価・条件・方法等において、異常に好意的な提示がなされている。（例：通常、ファイナンスが必要とされるような高額な貨物等の取引で、  現金による支払いを提示）</td><td></td><td class="radio-group"><label><input type="radio" name="HpChkQuest14" value="yes">はい</label><label><input type="radio" name="HpChkQuest14" value="no">いいえ</label></td></tr>
+                                                                <tr><td class="bg-efefef">15）</td><td colspan="2" class="bg-efefef">通常要求される程度の性能等の保証の要求がない。</td><td class="bg-efefef"></td><td class="bg-efefef radio-group"><label><input type="radio" name="HpChkQuest15" value="yes">はい</label><label><input type="radio" name="HpChkQuest15" value="no">いいえ</label><label><input type="radio" name="HpChkQuest15" value="na">対象外</label></td></tr>
+                                                                <tr><td>16）</td><td colspan="2">据付、指導等の通常予想される専門家の派遣、若しくは保守サービスの要請がない。</td><td></td><td class="radio-group"><label><input type="radio" name="HpChkQuest16" value="yes">はい</label><label><input type="radio" name="HpChkQuest16" value="no">いいえ</label><label><input type="radio" name="HpChkQuest16" value="na">対象外</label></td></tr>
+                                                                <tr><td class="bg-efefef">17）</td><td colspan="2" class="bg-efefef">最終仕向地、貨物等についての過度の秘密保持の要求がある。</td><td class="bg-efefef"></td><td class="bg-efefef radio-group"><label><input type="radio" name="HpChkQuest17" value="yes">はい</label><label><input type="radio" name="HpChkQuest17" value="no">いいえ</label></td></tr>
+                                                                <tr><td>18）</td><td colspan="2">顧客の事業に関する情報が明らかでない</td><td></td><td class="radio-group"><label><input type="radio" name="HpChkQuest18" value="yes">はい</label><label><input type="radio" name="HpChkQuest18" value="no">いいえ</label></td></tr>
+                                                                <tr><td class="bg-efefef">19）</td><td colspan="2" class="bg-efefef">顧客が製品の性能についての特徴に詳しくないにも関わらず、その商品を希望する</td><td class="bg-efefef"></td><td class="bg-efefef radio-group"><label><input type="radio" name="HpChkQuest19" value="yes">はい</label><label><input type="radio" name="HpChkQuest19" value="no">いいえ</label></td></tr>
+                                                                <tr><td>20）</td><td colspan="2">出荷日が曖昧である、もしくは仕向先が尋常でない</td><td></td><td class="radio-group"><label><input type="radio" name="HpChkQuest20" value="yes">はい</label><label><input type="radio" name="HpChkQuest20" value="no">いいえ</label></td></tr>
+                                                                <tr><td class="bg-efefef">21）</td><td colspan="2" class="bg-efefef">製品の最終仕向先が輸送業者になっている</td><td class="bg-efefef"></td><td class="bg-efefef radio-group"><label><input type="radio" name="HpChkQuest21" value="yes">はい</label><label><input type="radio" name="HpChkQuest21" value="no">いいえ</label></td></tr>
+                                                                <tr><td>22）</td><td colspan="2">顧客の注文が国内用か輸出用か明らかにしない</td><td></td><td class="radio-group"><label><input type="radio" name="HpChkQuest22" value="yes">はい</label><label><input type="radio" name="HpChkQuest22" value="no">いいえ</label></td></tr>
                                                             </table>
                                                         </td>
                                                     </tr>
@@ -152,10 +478,593 @@
                             </tr>
                         </table>
                     </div>
+
+                    <!-- TabPage5: ST審査票 -->
+                    <div id="tabPage5" class="tab-pane" style="background-color: #E0FFDF;">
+                        <table class="content-table" style="width:755px;">
+                            <tr>
+                                <td style="background-color: #E0FFDF;">
+                                    <table class="form-table" style="width:100%;">
+                                        <tr>
+                                            <td class="label-cell-lightgreen" style="width:151px;">注文品名（代表品名） <span class="required-star">*</span></td>
+                                            <td class="bg-ffffff" style="width:264px;"><input type="text" id="TextBox127"></td>
+                                            <td class="label-cell-lightgreen" style="width:113px;">総価格 <span class="required-star">*</span></td>
+                                            <td class="bg-ffffff" style="width:189px;"><input type="text" id="TextBox128"></td>
+                                        </tr>
+                                    </table>
+                                    <table class="form-table" style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <td class="label-cell-lightgreen" style="width:226px;">リスト規制（1～15項目）<br>貨物・技術名 <span class="required-star">*</span></td>
+                                                <td class="label-cell-lightgreen" style="width:94px;">規制項番<br>貨物 <span class="required-star">*</span></td>
+                                                <td class="label-cell-lightgreen" style="width:94px;"><br>技術 <span class="required-star">*</span></td>
+                                                <td class="label-cell-lightgreen" style="width:56px;"><br>数量 <span class="required-star">*</span></td>
+                                                <td class="label-cell-lightgreen" style="width:75px;">特例 <span class="required-star">*</span><br>（有 - ○）</td>
+                                                <td class="label-cell-lightgreen" style="width:170px;"><br>概要欄 <span class="required-star">*</span></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Repeat this row structure for TextBox129 to TextBox158 -->
+                                            <tr>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox129"></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox130"></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox131"></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox132"></td>
+                                                <td class="bg-ffffff"><input type="text" id="DialogList3" readonly placeholder="DialogList3"></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox133"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox134"></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox135"></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox136"></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox137"></td>
+                                                <td class="bg-ffffff"><input type="text" id="DialogList4" readonly placeholder="DialogList4"></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox138"></td>
+                                            </tr>
+                                            <!-- ... more rows ... -->
+                                        </tbody>
+                                    </table>
+                                    <table class="form-table" style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <td colspan="4" class="label-cell-lightgreen" style="width:225px;">調査事項</td>
+                                                <td class="label-cell-lightgreen" style="width:113px;">結 果 <span class="required-star">*</span></td>
+                                                <td class="label-cell-lightgreen" style="width:377px;">根拠・添付資料 <span class="required-star">*</span></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="label-cell-lightgreen" style="width:28px;"></td>
+                                                <td colspan="3" class="label-cell-lightgreen" style="width:197px;">外国ユーザーリスト 制限顧客リスト</td>
+                                                <td class="bg-ffffff radio-group"><label><input type="radio" name="Result1" value="non">非</label><label><input type="radio" name="Result1" value="corr">該</label></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox159"></td>
+                                            </tr>
+                                             <tr>
+                                                <td class="label-cell-lightgreen"></td>
+                                                <td colspan="3" class="label-cell-lightgreen">ハイリスク・プロファイル</td>
+                                                <td class="bg-ffffff radio-group"><label><input type="radio" name="Result2" value="non">非</label><label><input type="radio" name="Result2" value="corr">該</label></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox160"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-cell-lightgreen"></td>
+                                                <td class="label-cell-lightgreen" style="width:28px;"></td>
+                                                <td class="label-cell-lightgreen" style="width:28px;">客観要件</td>
+                                                <td class="label-cell-lightgreen" style="width:141px;">用 途</td>
+                                                <td class="bg-ffffff radio-group"><label><input type="radio" name="Result3" value="non">非</label><label><input type="radio" name="Result3" value="corr">該</label></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox161"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-cell-lightgreen"></td>
+                                                <td class="label-cell-lightgreen"></td>
+                                                <td class="label-cell-lightgreen"></td>
+                                                <td class="label-cell-lightgreen">需要者</td>
+                                                <td class="bg-ffffff radio-group"><label><input type="radio" name="Result4" value="non">非</label><label><input type="radio" name="Result4" value="corr">該</label></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox162"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-cell-lightgreen"></td>
+                                                <td class="label-cell-lightgreen"></td>
+                                                <td colspan="2" class="label-cell-lightgreen" style="width:169px;">行政指導要件</td>
+                                                <td class="bg-ffffff radio-group"><label><input type="radio" name="Result5" value="non">非</label><label><input type="radio" name="Result5" value="corr">該</label></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox163"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-cell-lightgreen"></td>
+                                                <td colspan="3" class="label-cell-lightgreen">インフォーム要件</td>
+                                                <td class="bg-ffffff radio-group"><label><input type="radio" name="Result6" value="non">非</label><label><input type="radio" name="Result6" value="corr">該</label></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox164"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-cell-lightgreen"></td>
+                                                <td colspan="3" class="label-cell-lightgreen">軍・国防機関・警察／軍事用途</td>
+                                                <td class="bg-ffffff radio-group"><label><input type="radio" name="Result7" value="non">非</label><label><input type="radio" name="Result7" value="corr">該</label></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox165"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-cell-lightgreen"></td>
+                                                <td colspan="3" class="label-cell-lightgreen">特別管理取引指定国・地域</td>
+                                                <td class="bg-ffffff radio-group"><label><input type="radio" name="Result8" value="non">非</label><label><input type="radio" name="Result8" value="corr">該</label></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox166"></td>
+                                            </tr>
+                                             <tr>
+                                                <td class="label-cell-lightgreen" rowspan="2">取引確認</td>
+                                                <td class="label-cell-lightgreen" rowspan="2">用途要件</td>
+                                                <td colspan="2" class="label-cell-lightgreen">取引書類より明確</td>
+                                                <td class="bg-ffffff radio-group"><label><input type="radio" name="Result9" value="clear">明瞭</label><label><input type="radio" name="Result9" value="unclear">不明</label></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox167"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="label-cell-lightgreen">用途確認書</td>
+                                                <td class="bg-ffffff radio-group"><label><input type="radio" name="Result10" value="yes">有</label><label><input type="radio" name="Result10" value="no">無</label></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox168"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                     <table class="form-table" style="width:100%;">
+                                        <tr>
+                                            <td class="label-cell-lightgreen" style="width:226px;">経済産業省への申請要否 <span class="required-star">*</span></td>
+                                            <td class="bg-ffffff" style="width:113px;">E/L申請</td>
+                                            <td class="bg-ffffff radio-group" style="width:377px;">
+                                                <label><input type="radio" name="ElChk" value="yes">要</label>
+                                                <label><input type="radio" name="ElChk" value="no">不要</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-cell-lightgreen">部門最終結論 <span class="required-star">*</span></td>
+                                            <td class="bg-ffffff">当該取引を</td>
+                                            <td class="bg-ffffff radio-group">
+                                                <label><input type="radio" name="DealingChk" value="do">する</label>
+                                                <label><input type="radio" name="DealingChk" value="dont">しない</label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="form-table" style="width:100%;">
+                                        <tr>
+                                            <td class="label-cell-lightgreen" style="width:132px;">理 由 <span class="required-star">*</span></td>
+                                            <td class="bg-ffffff" style="width:585px;"><textarea id="TextBox169"></textarea></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- TabPage6: 米国法審査票（別票） -->
+                    <div id="tabPage6" class="tab-pane" style="background-color: #E8E0FF;">
+                         <table class="content-table" style="width:755px;">
+                            <tr>
+                                <td style="background-color: #E8E0FF;">
+                                    <table class="form-table" style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <td class="label-cell-lightpurple" style="width:226px;">規制貨物・技術名 <span class="required-star">*</span></td>
+                                                <td class="label-cell-lightpurple" style="width:94px;">規制A 該当カテゴリー <span class="required-star">*</span></td>
+                                                <td class="label-cell-lightpurple" style="width:94px;">規制B <span class="required-star">*</span></td>
+                                                <td class="label-cell-lightpurple" style="width:56px;">数量 <span class="required-star">*</span></td>
+                                                <td class="label-cell-lightpurple" style="width:75px;">特例 <span class="required-star">*</span>（有り-○）</td>
+                                                <td class="label-cell-lightpurple" style="width:170px;">概要欄 <span class="required-star">*</span><br><span class="small-font-note">米国組込品の場合は組込率と計算式（別紙可）</span></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Repeat this row structure for TextBox170 to TextBox204 -->
+                                            <tr>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox170"></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox171"></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox172"></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox173"></td>
+                                                <td class="bg-ffffff"><input type="text" id="DialogList9" readonly placeholder="DialogList9"></td>
+                                                <td class="bg-ffffff"><input type="text" id="TextBox174"></td>
+                                            </tr>
+                                            <!-- ... more rows ... -->
+                                        </tbody>
+                                    </table>
+                                    <table class="form-table" style="width:100%;">
+                                        <tr><td class="label-cell-lightpurple" style="width:718px;">特例適用の内容（詳細）：部門記入 <span class="required-star">*</span></td></tr>
+                                        <tr><td class="bg-ffffff"><textarea id="TextBox205"></textarea></td></tr>
+                                        <tr><td class="label-cell-lightpurple">特例適用の内容（詳細）：安貿記入</td></tr>
+                                        <tr><td class="bg-ffffff"><textarea id="TextBox206" readonly></textarea></td></tr>
+                                    </table>
+                                    <table class="form-table" style="width:718px; border-color: #000000;">
+                                        <tr><td style="width:30px;" class="bg-efefef">[ⅰ]</td><td colspan="3" style="width:497px;" class="bg-efefef">最終仕向地はどこですか？</td><td style="width:151px;" class="bg-efefef"><input type="text" id="TextBox207"></td></tr>
+                                        <tr><td>[ⅱ]</td><td colspan="3">上記最終仕向地は下記核関連チェック不要国以外ですか？<br><span class="small-font-note">オーストリア・オーストラリア・ベルギー・カナダ・デンマーク・フィンランド・フランス・ドイツ・ギリシャ・アイスランド・アイルランド・イタリア・ルクセンブルグ・オランダ・ニュージーランド・ノルウェー・ポルトガル・スペイン・スウェーデン・トルコ・英国・米国</span></td><td class="radio-group"><label><input type="radio" name="UsaEtcChk2" value="yes">はい</label><label><input type="radio" name="UsaEtcChk2" value="no">いいえ</label></td></tr>
+                                        <tr><td class="bg-efefef"></td><td style="width:18px;" class="bg-efefef"></td><td style="width:49px;" class="bg-efefef">[ⅱ]-1）</td><td style="width:430px;" class="bg-efefef">最終顧客が下記の事業活動に従事している核関連企業であることを知っている</td><td style="width:151px;" class="bg-efefef radio-group"><label><input type="radio" name="UsaEtcChk3" value="yes">はい</label><label><input type="radio" name="UsaEtcChk3" value="no">いいえ</label></td></tr>
+                                        <tr><td class="bg-efefef"></td><td class="bg-efefef"></td><td class="bg-efefef">A．</td><td class="bg-efefef">核兵器または核爆発装置の研究開発、設計、製造、建設、試験或いはメンテナンス</td><td class="bg-efefef"></td></tr>
+                                        <tr><td class="bg-efefef"></td><td class="bg-efefef"></td><td class="bg-efefef">B．</td><td class="bg-efefef">IAEAの保障措置を受け入れていない原子炉、臨界施設、原子燃料製造装置、核物質転換装置または分離貯蔵装置の研究開発、設計、製造、建設、運転或いはメンテナンス</td><td class="bg-efefef"></td></tr>
+                                        <tr><td class="bg-efefef"></td><td class="bg-efefef"></td><td class="bg-efefef">C．</td><td class="bg-efefef">照射済特殊核燃料・核燃料物質の化学的加工施設、重水製造施設、核原料・特殊核物質の同位元素分離施設、プルトニウムを含む原子燃料製造施設及びそれらの構成部品の研究開発、設計、製造、建設、或いはメンテナンス</td><td class="bg-efefef"></td></tr>
+                                        <tr><td></td><td></td><td>[ⅱ]-2）</td><td>輸出される貨物・技術が下記目的に使用されることが判明している、或いはそのことを知っている</td><td class="radio-group"><label><input type="radio" name="UsaEtcChk4" value="yes">はい</label><label><input type="radio" name="UsaEtcChk4" value="no">いいえ</label></td></tr>
+                                        <tr><td></td><td></td><td>A．</td><td>核兵器または核爆発装置の研究開発、設計、製造、建設、試験或いはメンテナンス</td><td></td></tr>
+                                        <tr><td></td><td></td><td>B．</td><td>IAEAの保障措置を受け入れていない原子炉、臨界施設、原子燃料製造措置、核物質転換装置または分離貯蔵装置の研究開発、設計、製造、建設、運転或いはメンテナンス</td><td></td></tr>
+                                        <tr><td></td><td></td><td>C．</td><td>照射済特殊核燃料・核燃料物質の化学的加工施設、重水製造施設、核原料・特殊核物質の同位元素分離施設、プルトニウムを含む原子燃料製造施設及びそれらの構成部品の研究開発、設計、製造、建設、或いはメンテナンス</td><td></td></tr>
+                                        <tr><td class="bg-efefef">[ⅲ]</td><td colspan="3" class="bg-efefef">最終顧客がミサイル、ロケット・システムまたは無人航空機の設計、開発、製造または仕様に関与している企業であることを知っている</td><td class="bg-efefef radio-group"><label><input type="radio" name="UsaEtcChk5" value="yes">はい</label><label><input type="radio" name="UsaEtcChk5" value="no">いいえ</label></td></tr>
+                                        <tr><td>[ⅳ]</td><td colspan="3">貨物が以下のいずれかの軍事最終用途に供されることを知っている</td><td class="radio-group"><label><input type="radio" name="UsaEtcChk6" value="yes">はい</label><label><input type="radio" name="UsaEtcChk6" value="no">いいえ</label></td></tr>
+                                        <tr><td></td><td></td><td style="width:49px;">① </td><td style="width:430px;">米国武器リスト（USML）または国際武器リスト（IML）で規制される軍事関連貨物或いは最後の4桁が「A018」のECCNに該当するEAR規制貨物への組込み</td><td></td></tr>
+                                        <tr><td></td><td></td><td>② </td><td>上記①の軍事関連貨物の使用、開発、製造または配備のために設計された貨物への組込み</td><td></td></tr>
+                                        <tr><td></td><td></td><td><span class="small-font-note">*</span></td><td class="small-font-note">軍事関連貨物の例：巡航ミサイル、軍用機および軍用ヘリコプターの電子ユニット、捜索・照準・追跡用レーダー、偵察・監視・戦闘支援に使用可能な無人航空機、ロケット・ミサイルシステム、軍事作戦に使用可能な諜報・偵察・監視システム</td><td></td></tr>
+                                        <tr><td class="bg-efefef">[ⅴ]</td><td colspan="3" class="bg-efefef">貨物の最終顧客が以下のいずれかに該当する機関または個人であることを知っている</td><td class="bg-efefef radio-group"><label><input type="radio" name="UsaEtcChk7" value="yes">はい</label><label><input type="radio" name="UsaEtcChk7" value="no">いいえ</label></td></tr>
+                                        <tr><td class="bg-efefef"></td><td class="bg-efefef"></td><td class="bg-efefef">① </td><td class="bg-efefef">国家の群機関（特殊機関）</td><td class="bg-efefef"></td></tr>
+                                        <tr><td class="bg-efefef"></td><td class="bg-efefef"></td><td class="bg-efefef">② </td><td class="bg-efefef">特殊警察、政府の諜報・偵察機関</td><td class="bg-efefef"></td></tr>
+                                        <tr><td class="bg-efefef"></td><td class="bg-efefef"></td><td class="bg-efefef">③ </td><td class="bg-efefef">上記 [ⅴ] の特殊用途に関する活動への支援を目的とした機能または役割を担う機関・個人</td><td class="bg-efefef"></td></tr>
+                                    </table>
+                                     <table class="form-table" style="width:100%;">
+                                        <tr>
+                                            <td class="label-cell-lightpurple" style="width:226px;">米国輸出許可の申請要否 <span class="required-star">*</span></td>
+                                            <td class="bg-ffffff" style="width:113px;">米国 E/L申請</td>
+                                            <td class="bg-ffffff radio-group" style="width:377px;">
+                                                <label><input type="radio" name="ElChkUsa" value="yes">要</label>
+                                                <label><input type="radio" name="ElChkUsa" value="no">不要</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-cell-lightpurple">部門最終結論 <span class="required-star">*</span></td>
+                                            <td class="bg-ffffff">当該取引を</td>
+                                            <td class="bg-ffffff radio-group">
+                                                <label><input type="radio" name="DealingChkUsa" value="do">する</label>
+                                                <label><input type="radio" name="DealingChkUsa" value="dont">しない</label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="form-table" style="width:100%;">
+                                        <tr>
+                                            <td class="label-cell-lightpurple" style="width:132px;">理 由 <span class="required-star">*</span></td>
+                                            <td class="bg-ffffff" style="width:585px;"><textarea id="TextBox208"></textarea></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- TabPage7: 商品コードリスト -->
+                    <div id="tabPage7" class="tab-pane" style="background-color: #E0E0FF;">
+                        <table class="content-table" style="width:755px;">
+                            <tr>
+                                <td style="background-color: #E0E0FF;">
+                                    <input type="text" id="TextBox209" class="blue-text" style="width:100%; margin-bottom:5px;" placeholder="Filter...">
+                                    <textarea id="DialogList16" style="width: 585px; height: 151px; font-size:11pt;" readonly placeholder="商品コードリスト表示エリア"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- TabPage8: 部門用チェックシート -->
+                    <div id="tabPage8" class="tab-pane" style="background-color: #FFE0FF;">
+                        <table class="content-table" style="width:755px;">
+                            <tr>
+                                <td style="background-color: #FFE0FF;">
+                                    <div style="color:#4F4F4F;">
+                                        <p><strong>① 顧客客観情報資料</strong> （子会社、関連会社は不要）</p>
+                                        <ul>
+                                            <li>『その顧客へ貨物・技術を輸出しても安全』と判断したときの元となる資料を添付して下さい。</li>
+                                            <li>審査ポイントを蛍光ペン・フセン等でハイライトして下さい。</li>
+                                            <li>（会社案内、ホームページ写、ダンレポート等）</li>
+                                            <li><span class="small-font-note">※</span>英語以外の外国語は抄訳（ポイントの翻訳）を添付して下さい。</li>
+                                        </ul>
+                                        <p><strong>② フローチャート</strong></p>
+                                        <ul>
+                                            <li>複雑な商物流の場合、お金と貨物の流れを分かりやすく図にして下さい。</li>
+                                        </ul>
+                                        <p><strong>③ 契約書</strong> （個別審査でも継続取引であれば、添付して下さい）</p>
+                                        <ul>
+                                            <li>契約当事者はＯＫですか。（社名は合ってますか）</li>
+                                            <li>契約書の期限は有効ですか。</li>
+                                            <li>申請対象の商品（技術）がカバーされていますか。</li>
+                                            <li><span class="small-font-note">※</span>社内包括承認審査時、契約書がない又は、不備がある場合は、誓約書または更新誓約書を添付して下さい。</li>
+                                        </ul>
+                                        <p><strong class="red-text">④ プロジェクト包括承認最終需要者LIST等 （プロジェクト包括承認）</strong></p>
+                                        <p><strong class="red-text">④ オーダー明細書 【必須】 （Quotation等の出荷明細、数量、単価、合計金額の記載された書類）</strong></p>
+                                        <ul>
+                                            <li>CA審査票に記載されている内容と一致していますか。</li>
+                                        </ul>
+                                        <p><strong>⑤ 該非判定書</strong></p>
+                                        <ul>
+                                            <li>該非判定は既にされていますか。該非判定管理システムにて事前確認をして下さい。</li>
+                                        </ul>
+                                    </div>
+                                    <table class="form-table" style="width:100%;">
+                                        <tr><td colspan="2" style="border-bottom:1px solid #000000 !important;" class="small-font-note">※ 部門審査（一次審査）の結果と判断理由を書いて下さい。（社内包括承認・個別審査とも）</td></tr>
+                                        <tr><td colspan="2" class="bg-ffffff">部門取引担当者所見：</td></tr>
+                                        <tr><td style="width:12px;" class="bg-ffffff"></td><td class="bg-ffffff"><textarea id="TextBox210" style="width:703px;"></textarea></td></tr>
+                                        <tr><td colspan="2" class="bg-ffffff">部門取引審査責任者所見：</td></tr>
+                                        <tr><td class="bg-ffffff"></td><td class="bg-ffffff"><textarea id="TextBox211" style="width:703px;"></textarea></td></tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- TabPage9: 申請書類チェックシート -->
+                    <div id="tabPage9" class="tab-pane" style="background-color: #FFE0FF;">
+                        <p>申請書類チェックシート Content for TabPage9 (Details from original ASPX to be filled here)</p>
+                        <!-- Complex layout from TabPage9 needs to be replicated here -->
+                        <!-- This will involve many nested tables and form elements similar to the original -->
+                    </div>
                 </div>
             </div>
+
+            <!-- Sections after TabControl1 -->
+            <div class="section-header customer-header">契約相手先（カスタマー）</div>
+            <table class="form-table bg-e8e0ff" style="width:auto;">
+                <tr>
+                    <td class="label-cell" style="width:94px; background-color:#D2BFFF;">名 称</td>
+                    <td colspan="2" style="width:321px; background-color:#FFFFFF;"><span id="Label1156"></span><input type="text" id="TextBox227"></td>
+                    <td class="label-cell" style="width:94px; background-color:#D2BFFF;">コード</td>
+                    <td style="width:245px; background-color:#FFFFFF;"><span id="Label1158"></span></td>
+                </tr>
+                <tr>
+                    <td class="label-cell" style="background-color:#D2BFFF;">所在地</td>
+                    <td colspan="2" style="background-color:#FFFFFF;"><span id="Label1160"></span><input type="text" id="TextBox228"></td>
+                    <td class="label-cell" style="background-color:#D2BFFF;">国・地域名</td>
+                    <td style="background-color:#FFFFFF;"><span id="Label1162"></span></td>
+                </tr>
+                 <tr>
+                    <td class="label-cell" style="background-color:#D2BFFF;">違反等の有無等</td>
+                    <td style="width:102px; background-color:#FFFFFF;" class="radio-group">
+                        <label><input type="radio" name="BreachA" value="yes">有</label>
+                        <label><input type="radio" name="BreachA" value="no">無</label>
+                        <span class="red-text small-font-note">〔リスト表示〕で</span>
+                    </td>
+                    <td colspan="2" style="width:313px; background-color:#FFFFFF;">
+                        <table class="inline-table"><tr><td><input type="checkbox" id="CheckBox50_cust"><label for="CheckBox50_cust">リスト記載</label></td><td>制限顧客リスト記載</td></tr></table>
+                        <!-- CheckBox51, CheckBox52 were for specific list types, simplified here -->
+                        <span class="red-text small-font-note">表示される、すべてのリストをチェックしてください。</span>
+                    </td>
+                    <td style="width:245px; background-color:#FFFFFF;"><button type="button">リスト表示</button></td>
+                </tr>
+                <tr>
+                    <td class="label-cell" style="background-color:#D2BFFF;"></td>
+                    <td style="background-color:#FFFFFF;"><input type="checkbox" id="CheckBox53_cust"> <label for="CheckBox53_cust">（不明）</label></td>
+                    <td style="background-color:#FFFFFF;"></td>
+                    <td class="label-cell" style="background-color:#D2BFFF;">顧客種別</td>
+                    <td style="background-color:#FFFFFF;" class="radio-group">
+                        <label><input type="radio" name="CstA" value="sub">子会社</label>
+                        <label><input type="radio" name="CstA" value="aff">関連会社</label>
+                        <label><input type="radio" name="CstA" value="oth">その他</label>
+                    </td>
+                </tr>
+                 <tr>
+                    <td class="label-cell" style="background-color:#D2BFFF;">取引の状況</td>
+                    <td style="background-color:#FFFFFF;"><input type="checkbox" id="CheckBox54_cust"> <label for="CheckBox54_cust">継続</label></td>
+                    <td style="background-color:#FFFFFF;">（<input type="text" id="TextBox229_cust" style="width:50px;">年より <input type="text" id="TextBox230_cust" style="width:50px;">年間）</td>
+                    <td class="label-cell" style="background-color:#D2BFFF;">添付資料</td>
+                    <td style="background-color:#FFFFFF;" class="checkbox-group">
+                        <label><input type="checkbox" id="AttachA1_cust">会社概要</label>
+                        <label><input type="checkbox" id="AttachA2_cust">HP写</label>
+                        <label><input type="checkbox" id="AttachA3_cust">定款</label>
+                        <label>不要</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell" style="background-color:#D2BFFF;">輸出等区分</td>
+                    <td colspan="4" style="background-color:#FFFFFF;"><input type="checkbox" id="CheckBox55_cust" disabled> <label for="CheckBox55_cust">(区分)</label></td>
+                </tr>
+            </table>
+
+            <div class="section-header consignee-header">荷受人（コンサイニー） <input type="checkbox" id="CheckBox56" disabled> <label for="CheckBox56" class="red-text">カスタマーと同じ</label></div>
+            <table class="form-table bg-ffffc2" style="width:auto;">
+                <!-- Similar structure as Customer section, with bg-ffffc2 and #FFFFC2 for labels -->
+                <tr>
+                    <td class="label-cell" style="width:94px; background-color:#FFFFC2;">名 称</td>
+                    <td colspan="2" style="width:321px; background-color:#FFFFFF;"><input type="text" id="TextBox231_con"></td>
+                    <td class="label-cell" style="width:94px; background-color:#FFFFC2;">コード</td>
+                    <td style="width:245px; background-color:#FFFFFF;"></td>
+                </tr>
+                <!-- ... more rows for Consignee ... -->
+            </table>
+
+            <div class="section-header enduser-header">最終需要者 <input type="checkbox" id="CheckBox62" disabled> <label for="CheckBox62" class="red-text">コンサイニーと同じ</label></div>
+            <table class="form-table bg-ffe0f5" style="width:auto;">
+                <!-- Similar structure as Customer section, with bg-ffe0f5 and #FFE0F5 for labels -->
+                 <tr>
+                    <td class="label-cell" style="width:94px; background-color:#FFE0F5;">名 称</td>
+                    <td colspan="2" style="width:321px; background-color:#FFFFFF;"><input type="text" id="TextBox235_end"></td>
+                    <td class="label-cell" style="width:94px; background-color:#FFE0F5;">コード</td>
+                    <td style="width:189px; background-color:#FFFFFF;"><input type="text" id="TextBox236_end"></td>
+                    <td style="width:56px; background-color:#FFFFFF;"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell" style="background-color:#FFE0F5;">所在地</td>
+                    <td colspan="2" style="background-color:#FFFFFF;"><input type="text" id="TextBox237_end"></td>
+                    <td class="label-cell" style="background-color:#FFE0F5;">国・地域名</td>
+                    <td style="background-color:#FFFFFF;"><span id="Label1211_end"></span></td>
+                    <td style="background-color:#FFFFFF;"><button type="button">選択</button><button type="button">クリア</button></td>
+                </tr>
+                <!-- ... more rows for End User ... -->
+            </table>
+
+            <div class="section-header supplier-header">サプライヤー</div>
+            <table class="form-table bg-c2efff" style="width:auto;">
+                <!-- Similar structure as Customer section, with bg-c2efff and #C2EFFF for labels -->
+                 <tr>
+                    <td class="label-cell" style="width:94px; background-color:#C2EFFF;">名 称</td>
+                    <td style="width:321px; background-color:#FFFFFF;"><input type="text" id="TextBox240_sup"></td>
+                    <td class="label-cell" style="width:94px; background-color:#C2EFFF;">コード</td>
+                    <td style="width:151px; background-color:#FFFFFF;"><input type="text" id="TextBox241_sup"></td>
+                    <td style="width:94px; background-color:#FFFFFF;"></td>
+                </tr>
+                <!-- ... more rows for Supplier ... -->
+            </table>
+
+            <!-- Workflow/Approval Section -->
+            <table class="form-table" style="margin-top:10px;">
+                <tr>
+                    <td class="label-cell" style="width:26px; vertical-align:top;">次審査</td>
+                    <td style="width:597px;">
+                        <table class="form-table" style="width:100%;">
+                            <tr>
+                                <td class="label-cell" style="width:151px;">部門取引担当者</td><td style="width:37px;"></td>
+                                <td class="label-cell" style="width:151px;">部門取引審査責任者</td><td style="width:37px;"></td>
+                            </tr>
+                            <tr>
+                                <td><span id="Label1241_wfName1"></span></td><td class="red-text" style="font-weight:bold;">⇒</td>
+                                <td><span id="Label1243_wfName2" class="blue-text"></span><span id="Label1244_wfName2Kj"></span></td><td class="red-text" style="font-weight:bold;">⇒</td>
+                            </tr>
+                             <tr>
+                                <td><input type="date" id="DspWfDate1" value="2008-01-16" readonly></td><td></td>
+                                <td><input type="date" id="DspWfDate2" value="2008-01-16" readonly></td><td></td>
+                            </tr>
+                        </table>
+                        <table class="form-table" style="width:auto; margin-top:5px;">
+                             <tr>
+                                <td class="label-cell" style="width:75px;">送信回数</td>
+                                <td style="width:75px;"><span id="Label1248_sendCnt"></span></td>
+                                <td style="width:37px;"></td>
+                                <td style="width:151px;"><button type="button">選択</button></td>
+                                <td style="width:37px;"></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width:132px; vertical-align:bottom;">
+                        <table class="form-table" style="width:100%;">
+                            <tr><td class="label-cell">申請番号</td></tr>
+                            <tr><td><span id="Label1252_applyNo"></span></td></tr>
+                        </table>
+                    </td>
+                </tr>
+                 <tr>
+                    <td class="label-cell" style="vertical-align:top;">二次審査</td>
+                    <td colspan="2">
+                        <table class="form-table" style="width:100%;">
+                             <tr>
+                                <td style="width:37px;" class="red-text bold">⇒</td>
+                                <td class="label-cell" style="width:152px;">安貿受付日</td>
+                                <td style="width:37px;" class="red-text bold">⇒</td>
+                                <td class="label-cell" style="width:152px;">安貿取引審査担当者</td>
+                                <td style="width:37px;" class="red-text bold">⇒</td>
+                                <td class="label-cell" style="width:152px;">安貿取引審査責任者</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="date" id="DspWfDate3" value="2008-01-16" readonly><br><span class="red-text">未受付</span><br>書類受領日<br><input type="date" id="ReceiptDate" value="2008-01-16"></td>
+                                <td></td>
+                                <td><span id="Label1264_wfName4" class="blue-text"></span><span id="Label1265_wfName4Kj"></span><br><input type="date" id="DspWfDate4" value="2008-01-16" readonly><br><button type="button">選択</button></td>
+                                <td></td>
+                                <td><span id="Label1268_wfName5" class="blue-text"></span><span id="Label1269_wfName5Kj"></span><br><input type="date" id="WfDate5" value="2008-01-16"><br><button type="button">選択</button></td>
+                            </tr>
+                        </table>
+                         <table class="form-table" style="width:100%; margin-top:5px;">
+                            <tr>
+                                <td class="label-cell" style="width:113px;">外為 E/L審査</td>
+                                <td style="width:189px;" class="radio-group">
+                                    <label><input type="radio" name="ElJdg" value="yes">要</label>
+                                    <label><input type="radio" name="ElJdg" value="no">不要</label>
+                                    <label><input type="radio" name="ElJdg" value="ex">特例摘要</label>
+                                </td>
+                                <td style="width:389px;">
+                                    <table class="form-table">
+                                        <tr><td class="label-cell">輸出許可</td><td class="label-cell">役務取引許可</td></tr>
+                                        <tr><td><input type="text" id="TextBox243_elNo1"><br>有効期限: <input type="date" id="ElDate1" value="2008-01-16"></td>
+                                            <td><input type="text" id="TextBox244_elNo2"><br>有効期限: <input type="date" id="ElDate2" value="2008-01-16"></td></tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <!-- ... More rows for EAJdg, UsaElJdg, JudgeResult, Term, Reason ... -->
+                         </table>
+                    </td>
+                     <td style="vertical-align:bottom;">
+                        <table class="form-table" style="width:100%;">
+                            <tr><td class="label-cell">安貿承認番号</td></tr>
+                            <tr><td><span id="Label1272_approveNo"></span></td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- 技術判定 -->
+            <table class="form-table" style="margin-top:10px;">
+                 <tr>
+                    <td class="label-cell" style="width:26px; vertical-align:top;">技術判定</td>
+                    <td style="width:190px;">
+                        <table class="form-table">
+                            <tr><td class="label-cell">技術判定依頼日</td></tr>
+                            <tr><td><input type="date" id="RequestDate" value="2008-01-16"></td></tr>
+                        </table>
+                    </td>
+                    <td style="width:207px;">
+                         <table class="form-table">
+                            <tr><td class="label-cell">技術判定担当者</td></tr>
+                            <tr><td><span id="Label1320_techJudgeName" class="blue-text"></span><span id="Label1321_techJudgeNameKj"></span><br><input type="date" id="WfDate35" value="2008-01-16"><br><button type="button">選択</button></td></tr>
+                        </table>
+                    </td>
+                    <td style="width:330px;">
+                        <label for="TextBox252_techNotes">&lt;&lt;備考&gt;&gt;</label><br>
+                        <textarea id="TextBox252_techNotes" style="width:100%;"></textarea>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- 承認変更履歴 -->
+            <table class="form-table" style="margin-top:10px;">
+                <tr><td class="label-cell" style="width:755px;">承認変更履歴</td></tr>
+                <tr><td style="height:50px;"> (Content for approval history) </td></tr>
+            </table>
+
         </div>
     </form>
-    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function initializeTabControl(tabControlElementId) {
+                const tabControl = document.getElementById(tabControlElementId);
+                if (!tabControl) {
+                    // console.warn(`Tab control with id ${tabControlElementId} not found.`);
+                    return;
+                }
+
+                const tabStrip = tabControl.querySelector('.tab-strip');
+                const tabPanesContainer = tabControl.querySelector('.tab-content-container');
+
+                if (!tabStrip || !tabPanesContainer) {
+                    // console.warn(`Tab strip or panes container not found for ${tabControlElementId}`);
+                    return;
+                }
+                
+                const tabLinks = tabStrip.querySelectorAll('.tab-link');
+
+                tabLinks.forEach(link => {
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        // Deactivate current active tab and pane within this tabControl
+                        const currentActiveTabInStrip = tabStrip.querySelector('.tab.active');
+                        if (currentActiveTabInStrip) {
+                            currentActiveTabInStrip.classList.remove('active');
+                        }
+                        const currentActivePane = tabPanesContainer.querySelector('.tab-pane.active');
+                        if (currentActivePane) {
+                            currentActivePane.classList.remove('active');
+                        }
+
+                        // Activate new tab and pane
+                        const clickedTabElement = this.closest('.tab'); // Get the parent .tab element
+                        if (clickedTabElement) {
+                            clickedTabElement.classList.add('active');
+                        }
+                        
+                        const targetPaneId = this.getAttribute('data-tab');
+                        const targetPane = document.getElementById(targetPaneId); // Panes are unique by ID globally
+                        if (targetPane && tabPanesContainer.contains(targetPane)) { // Ensure targetPane is child of this container
+                            targetPane.classList.add('active');
+                        }
+                    });
+                });
+
+                // Ensure the first tab is active if none are explicitly set (or respect existing active class)
+                if (!tabStrip.querySelector('.tab.active') && tabLinks.length > 0) {
+                    const firstTab = tabLinks[0].closest('.tab');
+                     if (firstTab) {
+                        firstTab.classList.add('active');
+                     }
+                    const firstPaneId = tabLinks[0].getAttribute('data-tab');
+                    const firstPane = document.getElementById(firstPaneId);
+                    if (firstPane && tabPanesContainer.contains(firstPane)) {
+                        firstPane.classList.add('active');
+                    }
+                }
+            }
+
+            initializeTabControl('tabControl1');
+            initializeTabControl('tabControl2');
+        });
+    </script>
 </body>
-</html> 
+</html>
