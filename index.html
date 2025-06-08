@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form id="Form1">
+        <div class="toolbar" id="ActionBar">
+            <button type="button">閉じ</button>
+            <button type="button">編集</button>
+            <button type="button">下書き保</button>
+            <button type="button">保</button>
+            <button type="button">部門取引審査責任者へ送信</button>
+        </div>
+
+        <div class="page-container">
+            <!-- Top Information Section -->
+            <table class="form-table">
+                <tr>
+                    <td class="label-cell" style="width:94px;">作成者</td>
+                    <td style="width:132px;"><span id="Label683"></span></td>
+                    <td class="label-cell" style="width:94px;">部門名 <span class="required-star">*</span></td>
+                    <td colspan="3" style="width:307px;"><input type="text" id="TextBox114"></td>
+                    <td style="width:13px; border-right:1px solid #808080; border-left:1px solid #808080;"></td>
+                    <td class="label-cell" style="width:113px;">部門管理No.</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">作成日</td>
+                    <td><input type="date" id="CreateDate"></td>
+                    <td class="label-cell">Mail No. <span class="required-star">*</span></td>
+                    <td style="width:100px;"><input type="text" id="TextBox115"></td>
+                    <td class="label-cell" style="width:94px;">TEL <span class="required-star">*</span></td>
+                    <td style="width:113px;"><input type="text" id="TextBox116"></td>
+                    <td style="border-right:1px solid #808080; border-left:1px solid #808080;"></td>
+                    <td style="width:113px;"><input type="text" id="TextBox117"></td>
+                </tr>
+            </table>
+
+            <!-- TabControl1 -->
+            <div class="tab-container" id="tabControl1">
+                <div class="tab-strip TabControl1TabStrip">
+                    <div class="tab TabControl1Tab active" style="background-color: #FFFFD0;"><a href="#" class="tab-link TabControl1TabLink" data-tab="tabPage1">顧客審査票</a></div>
+                    <div class="tab TabControl1Tab" style="background-color: #E0FFFF;"><a href="#" class="tab-link TabControl1TabLink" data-tab="tabPage2">CA審査票</a></div>
+                    <div class="tab TabControl1Tab" style="background-color: #E0FFDF;"><a href="#" class="tab-link TabControl1TabLink" data-tab="tabPage5">ST審査票</a></div>
+                    <div class="tab TabControl1Tab" style="background-color: #E8E0FF;"><a href="#" class="tab-link TabControl1TabLink" data-tab="tabPage6">米国法審査票</a></div>
+                    <div class="tab TabControl1Tab" style="background-color: #E0E0FF;"><a href="#" class="tab-link TabControl1TabLink" data-tab="tabPage7">商品コードリスト</a></div>
+                    <div class="tab TabControl1Tab" style="background-color: #FFE0FF;"><a href="#" class="tab-link TabControl1TabLink" data-tab="tabPage8">部門用チェックシート</a></div>
+                    <div class="tab TabControl1Tab" style="background-color: #FFE0FF;"><a href="#" class="tab-link TabControl1TabLink" data-tab="tabPage9">申請書類チェックシート</a></div>
+                </div>
+                <div class="tab-content-container TabControl1Content">
+                    <!-- Tab content sections remain the same as in default.html -->
+                    <!-- ... existing tab content ... -->
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="script.js"></script>
+</body>
+</html> 
