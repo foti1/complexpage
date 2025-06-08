@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Application</title>
+    <title>WebForm7 Modernized</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -29,7 +29,7 @@
                 </tr>
                 <tr>
                     <td class="label-cell">作成日</td>
-                    <td><input type="date" id="CreateDate"></td>
+                    <td><input type="date" id="CreateDate" value="2008-01-16"></td>
                     <td class="label-cell">Mail No. <span class="required-star">*</span></td>
                     <td style="width:100px;"><input type="text" id="TextBox115"></td>
                     <td class="label-cell" style="width:94px;">TEL <span class="required-star">*</span></td>
@@ -51,8 +51,107 @@
                     <div class="tab TabControl1Tab" style="background-color: #FFE0FF;"><a href="#" class="tab-link TabControl1TabLink" data-tab="tabPage9">申請書類チェックシート</a></div>
                 </div>
                 <div class="tab-content-container TabControl1Content">
-                    <!-- Tab content sections remain the same as in default.html -->
-                    <!-- ... existing tab content ... -->
+                    <!-- TabPage1: 顧客審査票 -->
+                    <div id="tabPage1" class="tab-pane active" style="background-color: #FFFFD0;">
+                        <table class="content-table" style="width:755px;">
+                            <tr>
+                                <td style="background-color: #FFFFD0;">
+                                    <table class="form-table" style="width:100%;">
+                                        <tr>
+                                            <td class="label-cell-lightblue fixed-width-label">米国法判定 <span class="required-star">*</span></td>
+                                            <td class="fixed-width-content bg-ffffff radio-group">
+                                                <span class="red-text small-font-note">いずれに該当しますか？</span><br>
+                                                <label><input type="radio" name="ItarEccn" value="itar">規制A</label>
+                                                <label><input type="radio" name="ItarEccn" value="ear">規制B</label>
+                                                <label><input type="radio" name="ItarEccn" value="custom">独自規制</label>
+                                                <label><input type="radio" name="ItarEccn" value="ear99">規制C</label>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <table class="form-table" style="width:100%;">
+                                        <tr>
+                                            <td class="label-cell-lightblue fixed-width-label">前回の安貿取引承認No.</td>
+                                            <td class="fixed-width-content-small bg-ffffff"><input type="text" id="TextBox126"></td>
+                                            <td style="width:359px;" class="small-font-note red-text">← 取引関係者の組み合わせが全く同じ取引を以前にも行っていた　　場合 ご記入ください。</td>
+                                        </tr>
+                                    </table>
+
+                                    <!-- Nested TabControl2 -->
+                                    <div class="tab-container" id="tabControl2">
+                                        <div class="tab-strip TabControl2TabStrip">
+                                            <div class="tab TabControl2Tab active" style="background-color: #FFFFFF;"><a href="#" class="tab-link TabControl2TabLink" data-tab="tabPage3">&lt;&lt;チェック項目&gt;&gt;</a></div>
+                                            <div class="tab TabControl2Tab" style="background-color: #FFFFFF;"><a href="#" class="tab-link TabControl2TabLink" data-tab="tabPage4">&lt;&lt;ハイリスク・プロファイル・チェックシート &gt;&gt;</a></div>
+                                        </div>
+                                        <div class="tab-content-container TabControl2Content">
+                                            <!-- TabPage3: <<チェック項目>> -->
+                                            <div id="tabPage3" class="tab-pane active" style="background-color: #FFFFFF;">
+                                                <table class="content-table" style="width:718px;">
+                                                    <tr>
+                                                        <td class="bg-ffffff">
+                                                            <div class="section-header">&lt;需要者確認&gt;</div>
+                                                            <table class="form-table" style="width:100%; border-color: #C0C0C0;">
+                                                                <tr>
+                                                                    <td style="width:26px;" class="bg-efefef">［1］</td>
+                                                                    <td style="width:502px;" class="bg-efefef">顧客審査票の取引関係者のいずれかが特殊製品（注1）の開発等（注2）を行う又は過去に行ったことがあると解される情報がありますか？</td>
+                                                                    <td style="width:151px;" class="bg-efefef radio-group">
+                                                                        <label><input type="radio" name="ChkQuest1" value="yes">はい</label>
+                                                                        <label><input type="radio" name="ChkQuest1" value="no">いいえ</label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="bg-ffffff">［2］</td>
+                                                                    <td class="bg-ffffff">特殊製品の開発等の動向に関し、関連省庁が作成した文章等に取引先がありますか？尚、類似、疑義を生じた場合は「はい」とする。（外国ユーザーリスト/制限顧客リストの確認）</td>
+                                                                    <td class="bg-ffffff radio-group">
+                                                                        <label><input type="radio" name="ChkQuest2" value="yes">はい</label>
+                                                                        <label><input type="radio" name="ChkQuest2" value="no">いいえ</label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="bg-ffffff"></td>
+                                                                    <td colspan="2" class="bg-ffffff small-font-note">
+                                                                        注1：「特殊製品」とは、特殊用途製品、軍用の化学製剤もしくは細菌製剤もしくはこれらの散布のための装置またはこれらを運搬することができるロケットもしくは無人航空機をいいます。<br>
+                                                                        注2：「開発等」とは、開発、製造、使用または貯蔵をいいます。
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <div class="section-header">&lt;用途確認&gt;</div>
+                                                            <table class="form-table" style="width:100%; border-color: #C0C0C0;">
+                                                                <tr>
+                                                                    <td style="width:26px;">［3］</td>
+                                                                    <td colspan="3" style="width:501px;">取引に関し、特殊製品の開発等若しくは次に掲げるいずれかの行為を行うために用いられることとなる旨の情報がありますか？</td>
+                                                                    <td style="width:151px;" class="radio-group">
+                                                                        <label><input type="radio" name="ChkQuest3" value="yes">はい</label>
+                                                                        <label><input type="radio" name="ChkQuest3" value="no">いいえ</label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr><td></td><td style="width:26px;">①</td><td colspan="2" style="width:475px;">特殊燃料物質に関する開発等</td><td class="radio-group"><label><input type="radio" name="ChkQuest4" value="yes">はい</label><label><input type="radio" name="ChkQuest4" value="no">いいえ</label></td></tr>
+                                                                <tr><td></td><td>②</td><td colspan="2">特殊融合に関する研究</td><td class="radio-group"><label><input type="radio" name="ChkQuest5" value="yes">はい</label><label><input type="radio" name="ChkQuest5" value="no">いいえ</label></td></tr>
+                                                                <tr><td></td><td>③</td><td colspan="2">特殊炉、その部分品・付属品の開発等</td><td class="radio-group"><label><input type="radio" name="ChkQuest6" value="yes">はい</label><label><input type="radio" name="ChkQuest6" value="no">いいえ</label></td></tr>
+                                                                <tr><td></td><td>④</td><td colspan="2">特殊水の製造</td><td class="radio-group"><label><input type="radio" name="ChkQuest7" value="yes">はい</label><label><input type="radio" name="ChkQuest7" value="no">いいえ</label></td></tr>
+                                                                <tr><td></td><td>⑤</td><td colspan="2">特殊原料・燃料物質の加工・再処理</td><td class="radio-group"><label><input type="radio" name="ChkQuest8" value="yes">はい</label><label><input type="radio" name="ChkQuest8" value="no">いいえ</label></td></tr>
+                                                                <tr><td></td><td>⑥</td><td colspan="2">取引先が特殊機関若しくはこれらの機関から委託を受けていますか？</td><td class="radio-group"><label><input type="radio" name="ChkQuest9" value="yes">はい</label><label><input type="radio" name="ChkQuest9" value="no">いいえ</label></td></tr>
+                                                            </table>
+                                                            <table class="form-table" style="width:100%; border-color: #C0C0C0;">
+                                                                <tr>
+                                                                    <td style="width:26px;">［4］</td>
+                                                                    <td style="width:502px;">特殊製品の開発等のために用いられるおそれがあるものとして、関連省庁から通知されていますか？</td>
+                                                                    <td style="width:151px;" class="radio-group">
+                                                                        <label><input type="radio" name="ChkQuest14" value="yes">はい</label>
+                                                                        <label><input type="radio" name="ChkQuest14" value="no">いいえ</label>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
